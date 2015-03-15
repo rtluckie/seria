@@ -1,0 +1,77 @@
+### Python ###
+__pycache__/
+*.py[cod]
+# C extensions
+*.so
+# Distribution / packaging
+.Python
+develop-eggs/
+dist/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+.coverage
+MANIFEST
+coverage.xml
+nosetests.xml
+junit-report.xml
+pylint.txt
+toy.py
+tox.ini
+violations.pyflakes.txt
+cover/
+build/
+docs/_build
+requests.egg-info/
+*.swp
+*.egg
+env/
+.workon
+dist
+*.egg-info/
+.installed.cfg
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.cache
+# Translations
+*.mo
+*.pot
+# Django stuff:
+*.log
+# Sphinx documentation
+docs/_build/
+# PyBuilder
+target/
+### IPythonNotebook ###
+# Temporary data
+.ipynb_checkpoints/
+### Jetbrains ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
+*.iml
+.idea/
+*.ipr
+*.iws
+## Plugin-specific files:
+# IntelliJ
+out/
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+# JIRA plugin
+atlassian-ide-plugin.xml
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
