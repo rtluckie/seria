@@ -1,14 +1,22 @@
 Seria: Serialization for Humans
 ===============================
+.. image:: https://img.shields.io/pypi/v/seria.svg
+    :target: https://pypi.python.org/pypi/seria
 
+.. image:: https://img.shields.io/pypi/dm/seria.svg
+        :target: https://pypi.python.org/pypi/seria
+
+.. image:: https://travis-ci.org/rtluckie/seria.svg?branch=master
+    :target: https://travis-ci.org/rtluckie/seria
 
 Basic Usage
 -----------
 
 .. code-block:: python
 
+    import seria
     with open("tests/resources/good.xml", "rb") as f:
-        s = Seria(f)
+        s = seria.load(f)
         print s.dump('xml')
         print s.dump('json')
         print s.dump('yml')

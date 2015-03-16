@@ -2,5 +2,5 @@
 
 from .serializers import Serializer
 
-def seria(stream, *args, **kwargs):
+def load(stream, *args, **kwargs):
     return Serializer(stream, *args, **kwargs)
