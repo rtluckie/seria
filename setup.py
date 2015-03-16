@@ -30,12 +30,7 @@ class PyTest(TestCommand):
 with open('README.rst') as f:
     readme = f.read()
 # TODO: add long description
-long_description = """
-Long Description
-----
-%s
-----
-""" % (readme)
+long_description = "s%" % (readme)
 
 packages = [
     'seria',
@@ -48,7 +43,7 @@ install_requires = [
 
 setup(
     name='seria',
-    version='0.1.0',
+    version='0.1.1',
     description='DESCRIPTION',
     long_description=long_description,
     author='Ryan Luckie',
