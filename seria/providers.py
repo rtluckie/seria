@@ -6,7 +6,7 @@ except ImportError:
     try:
         from ordereddict import OrderedDict
     except ImportError:
-
+        OrderedDict = dict
 from xml.etree import ElementTree as ET
 
 import xmltodict
