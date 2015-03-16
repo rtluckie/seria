@@ -1,5 +1,11 @@
 import os
-import StringIO
+try:
+    from cStringIO import StringIO
+except ImportError:
+    try:
+        from StringIO import StringIO
+    except ImportError:
+        from io import StringIO
 
 import pytest
 
@@ -118,10 +124,10 @@ class TestSeriaRoundTrips(object):
     def test_xml_to_json_to_xml(self):
         with file(os.path.join(resources, 'good.xml'), 'r') as _original_xml_flo:
             _original_xml_Seria = Seria(_original_xml_flo)
-            _json_flo = StringIO.StringIO()
+            _json_flo = StringIO()
             _json_flo.write(_original_xml_Seria.dump(fmt='json'))
             _json_Seria = Seria(_json_flo)
-            _new_xml_flo = StringIO.StringIO()
+            _new_xml_flo = StringIO()
             _new_xml_flo.write(_json_Seria.dump(fmt='xml', pretty=True, newl='\n', indent='    '))
             _new_xml_flo.seek(0)
             _original_xml_flo.seek(0)

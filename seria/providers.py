@@ -1,5 +1,12 @@
 import json
-from collections import OrderedDict
+
+try:
+    from collections import OrderedDict
+except ImportError:
+    try:
+        from ordereddict import OrderedDict
+    except ImportError:
+
 from xml.etree import ElementTree as ET
 
 import xmltodict
@@ -94,6 +101,8 @@ class XML(object):
             return key, value
         except (ValueError, TypeError):
             return key, value
+
+
 class YAML(object):
     @staticmethod
     def validate_yaml(stream):
@@ -126,7 +135,6 @@ class YAML(object):
         defaults = {"default_flow_style": False}
         set_defaults(kwargs, defaults)
         return YAML.ordered_dump(serialized, Dumper=yaml.SafeDumper, *args, **kwargs)
-
 
 
     @staticmethod

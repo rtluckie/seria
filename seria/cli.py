@@ -1,5 +1,13 @@
 import sys
-import StringIO
+
+try:
+    from cStringIO import StringIO
+except ImportError:
+    try:
+        from StringIO import StringIO
+    except ImportError:
+        from io import StringIO
+
 from docopt import docopt
 
 from seria import Seria
@@ -20,7 +28,6 @@ Options:
 """
 
 
-
 def main():
     _serialized_obj = None
     args = docopt(docopt_args)
@@ -29,7 +36,7 @@ def main():
             _serialized_obj = Seria(f)
 
     elif args['INPUT'] == '-':
-        _serialized_obj = StringIO.StringIO()
+        _serialized_obj = StringIO()
         for l in sys.stdin:
             _serialized_obj.write(l)
         _serialized_obj = Seria(_serialized_obj)
@@ -40,6 +47,7 @@ def main():
         sys.stdout.write(_serialized_obj.dump('xml'))
     if args['--yaml']:
         sys.stdout.write(_serialized_obj.dump('yaml'))
+
 
 if __name__ == "__main__":
     main()
