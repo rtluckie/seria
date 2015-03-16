@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mydocument has="an attribute">
+    <and>
+        <many>elements</many>
+        <many>more elements</many>
+    </and>
+    <plus a="complex">element as well<plus>
+</mydocument>
