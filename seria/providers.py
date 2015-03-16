@@ -5,7 +5,7 @@ from xml.etree import ElementTree as ET
 import xmltodict
 import yaml
 
-from seria.utils import str_to_num, set_defaults
+from .utils import str_to_num, set_defaults
 
 
 class JSON(object):

@@ -36,10 +36,12 @@ setup(
     long_description=long_description,
     author='Ryan Luckie',
     author_email='rtluckie@gmail.com',
+    url='https://github.com/rtluckie/seria',
     packages=packages,
+    platforms=['all'],
     tests_require=['pytest', 'mock'],
     install_requires=install_requires,
-    py_modules=['seria'],
+    package_dir={'seria': 'seria'},
     license='MIT',
     keywords='yaml json yaml yml serialize serialization deserialize deserialization cli',
     entry_points={
