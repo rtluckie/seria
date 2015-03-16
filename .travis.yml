@@ -11,11 +11,5 @@ python:
   - "3.3"
   - "3.4"
 
-env:
-    - PIP_USE_MIRRORS=true
-
 script: "python setup.py test"
 
-matrix:
-  allow_failures:
-    - python: "3.1"

@@ -106,14 +106,7 @@ class TestSeria(object):
             assert _stream.is_json == False
             assert _stream.is_xml == True
             assert _stream.is_yaml == False
-#
-#
-class Testseria.load(object):
-    def test_input_must_be_flo(self):
-        with pytest.raises(Serializer.Error):
-            _ = seria.load("somestring")
 
-#
 class TestSeriaRoundTrips(object):
     def test_xml_to_json_to_xml(self):
         _source_fmt = 'xml'
@@ -128,7 +121,7 @@ class TestSeriaRoundTrips(object):
             _c.seek(0)
             _a.seek(0)
             assert _a.read() == _c.read()
-#
+
     def test_xml_to_yaml_to_xml(self):
         _source_fmt = 'xml'
         _target_fmt = 'yaml'
