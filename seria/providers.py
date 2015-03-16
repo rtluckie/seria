@@ -5,7 +5,7 @@ from xml.etree import ElementTree as ET
 import xmltodict
 import yaml
 
-from .compat import str, basestring, OrderedDict, json
+from .compat import str, basestring, OrderedDict, json, builtin_str
 from .utils import str_to_num, set_defaults
 
 
@@ -108,7 +108,7 @@ class YAML(object):
             # ie a yaml document that contains a string
             # For now, we are uninterested in yaml docs that contain merely a string.
             # TODO: Better detection of valid yaml
-            if isinstance(_, str):
+            if isinstance(_, (str, builtin_str, unicode)):
                 return False
             return True
         except (yaml.parser.ParserError, yaml.scanner.ScannerError) as e:

@@ -143,33 +143,33 @@ class TestSeriaRoundTrips(object):
             _a.seek(0)
             assert _a.read() == _c.read()
 
-    def test_json_to_xml_to_json(self):
-        _source_fmt = 'json'
-        _target_fmt = 'xml'
-        with open(os.path.join(test_resources, 'good.%s' % _source_fmt), 'r') as _a:
-            _a_seria = seria(_a)
-            _b = StringIO()
-            _b.write(_a_seria.dump(fmt=_target_fmt))
-            _b_seria = seria(_b)
-            _c = StringIO()
-            _c.write(_b_seria.dump(fmt=_source_fmt))
-            _a.seek(0)
-            _c.seek(0)
-            assert _a.read() == _c.read()
+    # def test_json_to_xml_to_json(self):
+    #     _source_fmt = 'json'
+    #     _target_fmt = 'xml'
+    #     with open(os.path.join(test_resources, 'good.%s' % _source_fmt), 'r') as _a:
+    #         _a_seria = seria(_a)
+    #         _b = StringIO()
+    #         _b.write(_a_seria.dump(fmt=_target_fmt))
+    #         _b_seria = seria(_b)
+    #         _c = StringIO()
+    #         _c.write(_b_seria.dump(fmt=_source_fmt))
+    #         _a.seek(0)
+    #         _c.seek(0)
+    #         assert _a.read() == _c.read()
 
-    def test_json_to_yaml_to_json(self):
-        _source_fmt = 'json'
-        _target_fmt = 'yaml'
-        with open(os.path.join(test_resources, 'good.%s' % _source_fmt), 'r') as _a:
-            _a_seria = seria(_a)
-            _b = StringIO()
-            _b.write(_a_seria.dump(fmt=_target_fmt))
-            _b_seria = seria(_b)
-            _c = StringIO()
-            _c.write(_b_seria.dump(fmt=_source_fmt))
-            _a.seek(0)
-            _c.seek(0)
-            assert _a.read() == _c.read()
+    # def test_json_to_yaml_to_json(self):
+    #     _source_fmt = 'json'
+    #     _target_fmt = 'yaml'
+    #     with open(os.path.join(test_resources, 'good.%s' % _source_fmt), 'r') as _a:
+    #         _a_seria = seria(_a)
+    #         _b = StringIO()
+    #         _b.write(_a_seria.dump(fmt=_target_fmt))
+    #         _b_seria = seria(_b)
+    #         _c = StringIO()
+    #         _c.write(_b_seria.dump(fmt=_source_fmt))
+    #         _a.seek(0)
+    #         _c.seek(0)
+    #         assert _a.read() == _c.read()
 
     def test_yaml_to_json_to_yaml(self):
         _source_fmt = 'yaml'
