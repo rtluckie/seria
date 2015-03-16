@@ -30,7 +30,7 @@ class PyTest(TestCommand):
 with open('README.rst') as f:
     readme = f.read()
 # TODO: add long description
-long_description = "s%" % (readme)
+long_description = "%s" % (readme)
 
 packages = [
     'seria',
