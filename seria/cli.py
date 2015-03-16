@@ -3,7 +3,7 @@
 import sys
 
 from .compat import StringIO
-from . import seria
+import seria
 
 from docopt import docopt
 
@@ -28,7 +28,7 @@ def main():
     args = docopt(docopt_args)
     if args['INPUT'] != '-':
         with open(args['INPUT'], 'rb') as f:
-            _serialized_obj = seria(f)
+            _serialized_obj = seria.load(f)
 
     elif args['INPUT'] == '-':
         _serialized_obj = StringIO()
@@ -38,7 +38,7 @@ def main():
             except TypeError:
                 _serialized_obj.write(bytes(l, 'utf-8'))
 
-        _serialized_obj = seria(_serialized_obj)
+        _serialized_obj = seria.load(_serialized_obj)
 
     if args['--json']:
         sys.stdout.write(_serialized_obj.dump('json'))
