@@ -3,7 +3,28 @@
 from __future__ import with_statement
 
 from setuptools import setup
+import sys
 
+from setuptools.command.test import test as TestCommand
+
+
+class PyTest(TestCommand):
+    user_options = [('pytest-args=', 'a', "Arguments to pass to py.test")]
+
+    def initialize_options(self):
+        TestCommand.initialize_options(self)
+        self.pytest_args = []
+
+    def finalize_options(self):
+        TestCommand.finalize_options(self)
+        self.test_args = []
+        self.test_suite = True
+
+    def run_tests(self):
+        #import here, cause outside the eggs aren't loaded
+        import pytest
+        errno = pytest.main(self.pytest_args)
+        sys.exit(errno)
 
 # TODO: Add readme
 with open('README.rst') as f:
@@ -25,10 +46,6 @@ install_requires = [
     'xmltodict==0.9.0',
 ]
 
-test_requires = [
-    'mock==1.0.1',
-    'pytest==2.5.2',
-]
 setup(
     name='seria',
     version='0.1.0',
@@ -40,6 +57,7 @@ setup(
     packages=packages,
     platforms=['all'],
     tests_require=['pytest', 'mock'],
+    cmdclass = {'test': PyTest},
     install_requires=install_requires,
     package_dir={'seria': 'seria'},
     license='MIT',
