@@ -6,7 +6,7 @@ import os
 test_resources = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'resources')
 from seria.compat import StringIO
 
-from seria import seria
+import seria
 from seria.serializers import get_formats, Serializer
 from seria.providers import XML, YAML, JSON
 
@@ -91,27 +91,27 @@ class TestSeriaFuncs(object):
 class TestSeria(object):
     def test_input_must_be_flo(self):
         with pytest.raises(Serializer.Error):
-            _ = seria("somestring")
+            _ = seria.load("somestring")
     def test_get_formats_when_stream_changes(self):
         with open(os.path.join(test_resources, 'good.xml'), 'r') as f:
-            _stream = seria(f)
+            _stream = seria.load(f)
         assert _stream.formats == (False, True, False)
         with open(os.path.join(test_resources, 'good.yaml'), 'r') as f:
-            _stream = seria(f)
+            _stream = seria.load(f)
         assert _stream.formats == (False, False, True)
 
     def test_format_property_access(self):
         with open(os.path.join(test_resources, 'good.xml'), 'r') as f:
-            _stream = seria(f)
+            _stream = seria.load(f)
             assert _stream.is_json == False
             assert _stream.is_xml == True
             assert _stream.is_yaml == False
 #
 #
-class Testseria(object):
+class Testseria.load(object):
     def test_input_must_be_flo(self):
         with pytest.raises(Serializer.Error):
-            _ = seria("somestring")
+            _ = seria.load("somestring")
 
 #
 class TestSeriaRoundTrips(object):
@@ -119,10 +119,10 @@ class TestSeriaRoundTrips(object):
         _source_fmt = 'xml'
         _target_fmt = 'json'
         with open(os.path.join(test_resources, 'good.%s' % _source_fmt), 'r') as _a:
-            _a_seria = seria(_a)
+            _a_seria = seria.load(_a)
             _b = StringIO()
             _b.write(_a_seria.dump(fmt=_target_fmt))
-            _b_seria = seria(_b)
+            _b_seria = seria.load(_b)
             _c = StringIO()
             _c.write(_b_seria.dump(fmt=_source_fmt, pretty=True, newl='\n', indent='    '))
             _c.seek(0)
@@ -133,10 +133,10 @@ class TestSeriaRoundTrips(object):
         _source_fmt = 'xml'
         _target_fmt = 'yaml'
         with open(os.path.join(test_resources, 'good.%s' % _source_fmt), 'r') as _a:
-            _a_seria = seria(_a)
+            _a_seria = seria.load(_a)
             _b = StringIO()
             _b.write(_a_seria.dump(fmt=_target_fmt))
-            _b_seria = seria(_b)
+            _b_seria = seria.load(_b)
             _c = StringIO()
             _c.write(_b_seria.dump(fmt=_source_fmt, pretty=True, newl='\n', indent='    '))
             _c.seek(0)
@@ -147,10 +147,10 @@ class TestSeriaRoundTrips(object):
     #     _source_fmt = 'json'
     #     _target_fmt = 'xml'
     #     with open(os.path.join(test_resources, 'good.%s' % _source_fmt), 'r') as _a:
-    #         _a_seria = seria(_a)
+    #         _a_seria = seria.load(_a)
     #         _b = StringIO()
     #         _b.write(_a_seria.dump(fmt=_target_fmt))
-    #         _b_seria = seria(_b)
+    #         _b_seria = seria.load(_b)
     #         _c = StringIO()
     #         _c.write(_b_seria.dump(fmt=_source_fmt))
     #         _a.seek(0)
@@ -161,10 +161,10 @@ class TestSeriaRoundTrips(object):
     #     _source_fmt = 'json'
     #     _target_fmt = 'yaml'
     #     with open(os.path.join(test_resources, 'good.%s' % _source_fmt), 'r') as _a:
-    #         _a_seria = seria(_a)
+    #         _a_seria = seria.load(_a)
     #         _b = StringIO()
     #         _b.write(_a_seria.dump(fmt=_target_fmt))
-    #         _b_seria = seria(_b)
+    #         _b_seria = seria.load(_b)
     #         _c = StringIO()
     #         _c.write(_b_seria.dump(fmt=_source_fmt))
     #         _a.seek(0)
@@ -175,10 +175,10 @@ class TestSeriaRoundTrips(object):
         _source_fmt = 'yaml'
         _target_fmt = 'json'
         with open(os.path.join(test_resources, 'good.%s' % _source_fmt), 'r') as _a:
-            _a_seria = seria(_a)
+            _a_seria = seria.load(_a)
             _b = StringIO()
             _b.write(_a_seria.dump(fmt=_target_fmt))
-            _b_seria = seria(_b)
+            _b_seria = seria.load(_b)
             _c = StringIO()
             _c.write(_b_seria.dump(fmt=_source_fmt))
             _a.seek(0)
@@ -189,10 +189,10 @@ class TestSeriaRoundTrips(object):
         _source_fmt = 'yaml'
         _target_fmt = 'xml'
         with open(os.path.join(test_resources, 'good.%s' % _source_fmt), 'r') as _a:
-            _a_seria = seria(_a)
+            _a_seria = seria.load(_a)
             _b = StringIO()
             _b.write(_a_seria.dump(fmt=_target_fmt))
-            _b_seria = seria(_b)
+            _b_seria = seria.load(_b)
             _c = StringIO()
             _c.write(_b_seria.dump(fmt=_source_fmt))
             _a.seek(0)
