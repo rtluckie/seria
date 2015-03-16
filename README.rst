@@ -27,10 +27,10 @@ Seria includes a useful command line tool.
 
 .. code-block:: bash
     
-    cat tests/resources/good.xml | seria -y
-    cat tests/resources/good.json | seria -j
-    cat tests/resources/good.yaml | seria -x
-    cat tests/resources/good.xml | seria -x - | seria -j - | seria -y
+    cat tests/resources/good.xml | seria -y -
+    cat tests/resources/good.json | seria -j -
+    cat tests/resources/good.yaml | seria -x -
+    cat tests/resources/good.xml | seria -x - | seria -j - | seria -y -
 
 
 Features
