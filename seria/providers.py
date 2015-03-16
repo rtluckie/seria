@@ -1,17 +1,11 @@
-import json
+# -*- coding: utf-8 -*-
 
-try:
-    from collections import OrderedDict
-except ImportError:
-    try:
-        from ordereddict import OrderedDict
-    except ImportError:
-        OrderedDict = dict
 from xml.etree import ElementTree as ET
 
 import xmltodict
 import yaml
 
+from .compat import str, basestring, OrderedDict, json
 from .utils import str_to_num, set_defaults
 
 
@@ -20,7 +14,7 @@ class JSON(object):
     def validate_json(stream):
         stream.seek(0)
         try:
-            json.load(stream)
+            json.loads(str(stream.read()))
             return True
         except ValueError:
             return False
@@ -84,7 +78,7 @@ class XML(object):
     def ordered_load(stream, *args, **kwargs):
         defaults = {'postprocessor': XML.postprocessor}
         set_defaults(kwargs, defaults)
-        return xmltodict.parse(stream, *args, **kwargs)
+        return xmltodict.parse(stream.read(), *args, **kwargs)
 
     @staticmethod
     def ordered_dump(data, *args, **kwargs):

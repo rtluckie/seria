@@ -1,16 +1,11 @@
+# -*- coding: utf-8 -*-
+
 import sys
 
-try:
-    from cStringIO import StringIO
-except ImportError:
-    try:
-        from StringIO import StringIO
-    except ImportError:
-        from io import StringIO
+from .compat import StringIO
+from . import seria
 
 from docopt import docopt
-
-from seria import Seria
 
 docopt_args = """Seria - Serialization for humans
 
@@ -33,13 +28,17 @@ def main():
     args = docopt(docopt_args)
     if args['INPUT'] != '-':
         with open(args['INPUT'], 'rb') as f:
-            _serialized_obj = Seria(f)
+            _serialized_obj = seria(f)
 
     elif args['INPUT'] == '-':
         _serialized_obj = StringIO()
         for l in sys.stdin:
-            _serialized_obj.write(l)
-        _serialized_obj = Seria(_serialized_obj)
+            try:
+                _serialized_obj.write(str(l))
+            except TypeError:
+                _serialized_obj.write(bytes(l, 'utf-8'))
+
+        _serialized_obj = seria(_serialized_obj)
 
     if args['--json']:
         sys.stdout.write(_serialized_obj.dump('json'))

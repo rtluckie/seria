@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 def str_to_num(i, exact_match=True):
     """
     Attempts to convert a str to either an int or float
