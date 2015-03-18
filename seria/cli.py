@@ -26,6 +26,11 @@ Options:
 def main():
     _serialized_obj = None
     args = docopt(docopt_args)
+
+    if not args['INPUT']:
+        print docopt_args
+        return
+
     if args['INPUT'] != '-':
         with open(args['INPUT'], 'rb') as f:
             _serialized_obj = seria.load(f)
