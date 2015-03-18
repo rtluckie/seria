@@ -19,7 +19,7 @@ Basic Usage
         s = seria.load(f)
         print s.dump('xml')
         print s.dump('json')
-        print s.dump('yml')
+        print s.dump('yaml')
 
 CLI Tool
 -----------
