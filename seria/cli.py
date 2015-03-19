@@ -23,7 +23,6 @@ def cli(out_fmt, input, output):
         except TypeError:
             _input.write(bytes(l, 'utf-8'))
     _serialized_obj = seria.load(_input)
-    print output
     output.write(_serialized_obj.dump(out_fmt))
 
 
