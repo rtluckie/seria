@@ -1,52 +1,32 @@
 # -*- coding: utf-8 -*-
 
-import sys
-
+import click
 from .compat import StringIO
 import seria
 
-from docopt import docopt
 
-docopt_args = """Seria - Serialization for humans
-
-Usage:
-  seria [-h]
-  seria ([--json | -j ] | [--xml | -x] | [--yaml | -y]) (INPUT|"[-]")
-
-Arguments:
-  INPUT  Input stream for serialization.  Can be file stdin stream or uri
-Options:
-  -h --help             show this help message and exit
-  -j --json             Output json
-  -x --xml              Output xml
-  -y --yaml             Output yaml
-"""
+CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
 
-def main():
-    _serialized_obj = None
-    args = docopt(docopt_args)
-    if args['INPUT'] != '-':
-        with open(args['INPUT'], 'rb') as f:
-            _serialized_obj = seria.load(f)
-
-    elif args['INPUT'] == '-':
-        _serialized_obj = StringIO()
-        for l in sys.stdin:
-            try:
-                _serialized_obj.write(str(l))
-            except TypeError:
-                _serialized_obj.write(bytes(l, 'utf-8'))
-
-        _serialized_obj = seria.load(_serialized_obj)
-
-    if args['--json']:
-        sys.stdout.write(_serialized_obj.dump('json'))
-    if args['--xml']:
-        sys.stdout.write(_serialized_obj.dump('xml'))
-    if args['--yaml']:
-        sys.stdout.write(_serialized_obj.dump('yaml'))
+@click.command(context_settings=CONTEXT_SETTINGS)
+@click.option('--xml', 'out_fmt', flag_value='xml')
+@click.option('--yaml', 'out_fmt', flag_value='yaml')
+@click.option('--json', 'out_fmt', flag_value='json')
+@click.argument('input', type=click.File('rb'), default='-')
+@click.argument('output', type=click.File('wb'), default='-')
+def cli(out_fmt, input, output):
+    """Converts text."""
+    _input = StringIO()
+    for l in input:
+        try:
+            _input.write(str(l))
+        except TypeError:
+            _input.write(bytes(l, 'utf-8'))
+    _serialized_obj = seria.load(_input)
+    print output
+    output.write(_serialized_obj.dump(out_fmt))
 
 
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    cli(out_fmt, input, output)
+
