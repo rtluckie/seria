@@ -89,9 +89,6 @@ class TestSeriaFuncs(object):
 
 
 class TestSeria(object):
-    def test_input_must_be_flo(self):
-        with pytest.raises(Serializer.Error):
-            _ = seria.load("somestring")
     def test_get_formats_when_stream_changes(self):
         with open(os.path.join(test_resources, 'good.xml'), 'r') as f:
             _stream = seria.load(f)
@@ -106,6 +103,13 @@ class TestSeria(object):
             assert _stream.is_json == False
             assert _stream.is_xml == True
             assert _stream.is_yaml == False
+
+
+class TestSeriaErrors(object):
+    def test_input_must_be_flo(self):
+        with pytest.raises(Serializer.Error):
+            _ = seria.load("somestring")
+
 
 class TestSeriaRoundTrips(object):
     def test_xml_to_json_to_xml(self):

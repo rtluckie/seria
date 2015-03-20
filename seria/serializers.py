@@ -3,7 +3,7 @@
 from .providers import (
     XML,
     JSON,
-    YAML
+    YAML,
 )
 
 
@@ -13,6 +13,7 @@ def get_formats(stream):
         stream.seek(0)
         fmts.append(_fmt.is_it(stream))
     return tuple(fmts)
+
 
 class Serializer(object):
     class Error(Exception):
