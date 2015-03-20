@@ -59,7 +59,7 @@ setup(
     keywords='yaml json yaml yml serialize serialization deserialize deserialization cli',
     entry_points={
         'console_scripts': [
-            'seria = seria.cli:main',
+            'seria = seria.cli:cli',
         ]
     },
     classifiers=[
