@@ -12,6 +12,8 @@ except (ImportError, SyntaxError):
     import json
 
 if is_py2:
+    from StringIO import StringIO
+
     try:
         from collections import OrderedDict
     except ImportError:
@@ -19,7 +21,7 @@ if is_py2:
             from ordereddict import OrderedDict
         except ImportError:
             OrderedDict = dict
-    from StringIO import StringIO
+
     basestring = basestring
     builtin_str = str
     bytes = str
@@ -29,6 +31,7 @@ if is_py2:
 elif is_py3:
     from io import StringIO
     from collections import OrderedDict
+
     basestring = (str, bytes)
     builtin_str = str
     bytes = bytes

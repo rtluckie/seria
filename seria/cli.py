@@ -1,11 +1,16 @@
 # -*- coding: utf-8 -*-
 
-import click
-from .compat import StringIO, str, builtin_str
+from .compat import StringIO, str
 import seria
+
+import click
 
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
+
+input = None
+output = None
+out_fmt = None
 
 
 @click.command(context_settings=CONTEXT_SETTINGS)
