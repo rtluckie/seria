@@ -9,9 +9,10 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
 
 @click.command(context_settings=CONTEXT_SETTINGS)
-@click.option('--xml', 'out_fmt', flag_value='xml')
-@click.option('--yaml', 'out_fmt', flag_value='yaml')
-@click.option('--json', 'out_fmt', flag_value='json')
+@click.option('--xml', '-x', 'out_fmt', flag_value='xml')
+@click.option('--yaml', '--yml', '-y', 'out_fmt', flag_value='yaml')
+@click.option('--yml', 'out_fmt', flag_value='yaml')
+@click.option('--json', '-j', 'out_fmt', flag_value='json')
 @click.argument('input', type=click.File('r'), default='-')
 @click.argument('output', type=click.File('w'), default='-')
 def cli(out_fmt, input, output):
