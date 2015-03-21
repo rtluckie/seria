@@ -1,36 +1,20 @@
 # -*- coding: utf-8 -*-
+from string import printable
 
-def str_to_num(i, exact_match=True):
-    """
-    Attempts to convert a str to either an int or float
-    """
-    # TODO: Cleanup -- this is really ugly
-    if not isinstance(i, str):
-        return i
+def str_to_num(data):
+    """ Attempts to convert a str to either an int or float """
+    for structure in [int, float]:
+        if isinstance(data, structure):
+            return data
     try:
-        _ = int(i)
-        if not exact_match:
-            return _
-        elif str(_) == i:
-            return _
-        else:
-            pass
-    except ValueError:
-        pass
-    try:
-        _ = float(i)
-        if not exact_match:
-            return _
-        elif str(_) == i:
-            return _
-        else:
-            pass
-    except ValueError:
-        pass
-    return i
-
+        data = float(data)
+    except ValueError as error:
+        data = float(str(error).strip(printable[10:]))
+    if data.is_integer():
+        data = int(data)
+    return data
 
 def set_defaults(kwargs, defaults):
-    for k, v in defaults.items():
-        if k not in kwargs:
-            kwargs[k] = v
+    for key, value in defaults.items():
+        if key not in kwargs:
+            kwargs[key] = value
