@@ -38,8 +38,9 @@ packages = [
 install_requires = [
     'docopt==0.6.2',
     'PyYAML==3.11',
-    'xmltodict==0.9.0',
-]
+    'xmltodict==0.9.2',
+    'click==3.3',
+    ]
 
 setup(
     name='seria',
@@ -59,7 +60,7 @@ setup(
     keywords='yaml json yaml yml serialize serialization deserialize deserialization cli',
     entry_points={
         'console_scripts': [
-            'seria = seria.cli:main',
+            'seria = seria.cli:cli',
         ]
     },
     classifiers=[

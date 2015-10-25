@@ -1,52 +1,37 @@
 # -*- coding: utf-8 -*-
 
-import sys
-
-from .compat import StringIO
+from .compat import StringIO, str
 import seria
 
-from docopt import docopt
-
-docopt_args = """Seria - Serialization for humans
-
-Usage:
-  seria [-h]
-  seria ([--json | -j ] | [--xml | -x] | [--yaml | -y]) (INPUT|"[-]")
-
-Arguments:
-  INPUT  Input stream for serialization.  Can be file stdin stream or uri
-Options:
-  -h --help             show this help message and exit
-  -j --json             Output json
-  -x --xml              Output xml
-  -y --yaml             Output yaml
-"""
+import click
 
 
-def main():
-    _serialized_obj = None
-    args = docopt(docopt_args)
-    if args['INPUT'] != '-':
-        with open(args['INPUT'], 'rb') as f:
-            _serialized_obj = seria.load(f)
+CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
-    elif args['INPUT'] == '-':
-        _serialized_obj = StringIO()
-        for l in sys.stdin:
-            try:
-                _serialized_obj.write(str(l))
-            except TypeError:
-                _serialized_obj.write(bytes(l, 'utf-8'))
-
-        _serialized_obj = seria.load(_serialized_obj)
-
-    if args['--json']:
-        sys.stdout.write(_serialized_obj.dump('json'))
-    if args['--xml']:
-        sys.stdout.write(_serialized_obj.dump('xml'))
-    if args['--yaml']:
-        sys.stdout.write(_serialized_obj.dump('yaml'))
+input = None
+output = None
+out_fmt = None
 
 
-if __name__ == "__main__":
-    main()
+@click.command(context_settings=CONTEXT_SETTINGS)
+@click.option('--xml', '-x', 'out_fmt', flag_value='xml')
+@click.option('--yaml', '--yml', '-y', 'out_fmt', flag_value='yaml')
+@click.option('--yml', 'out_fmt', flag_value='yaml')
+@click.option('--json', '-j', 'out_fmt', flag_value='json')
+@click.argument('input', type=click.File('r'), default='-')
+@click.argument('output', type=click.File('w'), default='-')
+def cli(out_fmt, input, output):
+    """Converts text."""
+    _input = StringIO()
+    for l in input:
+        try:
+            _input.write(str(l))
+        except TypeError:
+            _input.write(bytes(l, 'utf-8'))
+    _input = seria.load(_input)
+    _out = (_input.dump(out_fmt))
+    output.write(_out)
+
+
+if __name__ == '__main__':
+    cli(out_fmt, input, output)

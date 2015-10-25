@@ -8,21 +8,12 @@ def str_to_num(i, exact_match=True):
     if not isinstance(i, str):
         return i
     try:
-        _ = int(i)
         if not exact_match:
-            return _
-        elif str(_) == i:
-            return _
-        else:
-            pass
-    except ValueError:
-        pass
-    try:
-        _ = float(i)
-        if not exact_match:
-            return _
-        elif str(_) == i:
-            return _
+            return int(i)
+        elif str(int(i)) == i:
+            return int(i)
+        elif str(float(i)) == i:
+            return float(i)
         else:
             pass
     except ValueError:
