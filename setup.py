@@ -44,7 +44,7 @@ install_requires = [
 
 setup(
     name='seria',
-    version='0.1.3',
+    version='0.1.4',
     description='Serialization for Humans',
     long_description=long_description,
     author='Ryan Luckie',
