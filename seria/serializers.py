@@ -47,12 +47,12 @@ class Serializer(object):
     def is_yaml(self):
         return self.formats[2]
 
-    def dump(self, fmt, *args, **kwargs):
-        if fmt == 'yaml':
-            return YAML.dump(self.serialized, *args, **kwargs)
-        elif fmt == 'json':
+    def dump(self, fmt=None, *args, **kwargs):
+        if fmt == 'json' or (fmt is None and self.is_json):
             return JSON.dump(self.serialized, *args, **kwargs)
-        elif fmt == 'xml':
+        elif fmt == 'yaml' or (fmt is None and self.is_yaml):
+            return YAML.dump(self.serialized, *args, **kwargs)
+        elif fmt == 'xml' or (fmt is None and self.is_xml):
             return XML.dump(self.serialized, *args, **kwargs)
         else:
             raise Serializer.Error("Requested format '%s' is not a supported format" % fmt)

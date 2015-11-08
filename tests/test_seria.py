@@ -195,3 +195,36 @@ class TestSeriaRoundTrips(object):
             _a.seek(0)
             _c.seek(0)
             assert _a.read() == _c.read()
+
+    def test_dump_json_in_source_format(self):
+        _source_fmt = 'json'
+        with open(os.path.join(test_resources, 'good.%s' % _source_fmt), 'r') as _a:
+            _a_seria = seria.load(_a)
+            _b = StringIO()
+            _b.write(_a_seria.dump(separators=(',', ': ')))
+            _b_seria = seria.load(_b)
+            _a.seek(0)
+            _b.seek(0)
+            assert _a.read() == _b.read()
+
+    def test_dump_yaml_in_source_format(self):
+        _source_fmt = 'yaml'
+        with open(os.path.join(test_resources, 'good.%s' % _source_fmt), 'r') as _a:
+            _a_seria = seria.load(_a)
+            _b = StringIO()
+            _b.write(_a_seria.dump())
+            _b_seria = seria.load(_b)
+            _a.seek(0)
+            _b.seek(0)
+            assert _a.read() == _b.read()
+
+    def test_dump_xml_in_source_format(self):
+        _source_fmt = 'xml'
+        with open(os.path.join(test_resources, 'good.%s' % _source_fmt), 'r') as _a:
+            _a_seria = seria.load(_a)
+            _b = StringIO()
+            _b.write(_a_seria.dump())
+            _b_seria = seria.load(_b)
+            _a.seek(0)
+            _b.seek(0)
+            assert _a.read() == _b.read()
