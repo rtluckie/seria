@@ -36,15 +36,14 @@ packages = [
     'seria',
     ]
 install_requires = [
-    'docopt==0.6.2',
-    'PyYAML==3.11',
-    'xmltodict==0.9.2',
-    'click==3.3',
+    'PyYAML>=3.11',
+    'xmltodict>=0.9.2',
+    'click>=3.3',
     ]
 
 setup(
     name='seria',
-    version='0.1.4',
+    version='0.1.5',
     description='Serialization for Humans',
     long_description=long_description,
     author='Ryan Luckie',
