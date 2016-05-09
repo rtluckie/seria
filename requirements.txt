@@ -1,15 +1,5 @@
-
-# sha256: uDndLZwRfHAUMMFJlWkYpCOphjtIsJyQ4wpgE-fS9E8
-mock==1.0.1
-
-# sha256: liRSYReZh4YW1t9ednTMLDVvkC7QBdxNrp1OebuKvaQ
-pytest==2.5.2
-
-# sha256: w2yTiocuX_SUk4szsUqqFWy0OexnVI_Ks1Nbt4sIRug
-PyYAML==3.11
-
-# md5: ab17e53214a8613ad87968e9674d75dd
+mock>=1.0.1
+pytest>=2.5.2
+PyYAML>=3.11
 xmltodict>=0.9.0
-
-# md5: 40edaba4d216915a8326c5b2cb52781d
-click==3.3
+click>=3.3
